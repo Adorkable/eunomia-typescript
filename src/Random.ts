@@ -1,7 +1,7 @@
 import seedrandom from 'seedrandom'
 
 import cloneDeep from 'lodash.clonedeep'
-import { clamp, mirror, wrap } from './Number';
+import { clamp, mirror, wrap } from './Number'
 
 /**
  * Random function signature
@@ -35,12 +35,13 @@ export const initializeRandom = (seed: any): RandomFunction => {
 /**
  * Error returned when calling `random` before it has been initialized
  */
-export const randomNoFunctionAvailableError = 'No random function available, either provide a function or initialize random globally'
+export const randomNoFunctionAvailableError =
+  'No random function available, either provide a function or initialize random globally'
 
 /**
  * Generate a random number
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
- * @returns Randomly generated number 
+ * @returns Randomly generated number
  */
 export const random = (randomFunction?: RandomFunction): number => {
   const selectRandomFunction = () => {
@@ -83,7 +84,10 @@ export const randomBool = (randomFunction?: RandomFunction): boolean => {
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Valid random index
  */
-export const randomIndexValueInArray = (withinArray: Array<any>, randomFunction?: RandomFunction): number => {
+export const randomIndexValueInArray = (
+  withinArray: Array<any>,
+  randomFunction?: RandomFunction
+): number => {
   const portion = withinArray.length * random(randomFunction)
   const rounded = Math.round(portion)
   return rounded % withinArray.length
@@ -95,28 +99,48 @@ export const randomIndexValueInArray = (withinArray: Array<any>, randomFunction?
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Random value from the provided array
  */
-export const randomValueInArray = <TypeOfValue>(withinArray: Array<TypeOfValue>, randomFunction?: RandomFunction): TypeOfValue => {
+export const randomValueInArray = <TypeOfValue>(
+  withinArray: Array<TypeOfValue>,
+  randomFunction?: RandomFunction
+): TypeOfValue => {
   return withinArray[randomIndexValueInArray(withinArray, randomFunction)]
 }
 
 // TODO: class?
 export type ValueAndDrift = {
-  value: number;
-  allowedDrift: number;
+  value: number
+  allowedDrift: number
 }
 
-export const appliedRandomDrift = (valueAndDrift: ValueAndDrift, randomFunction?: RandomFunction): ValueAndDrift => {
+export const appliedRandomDrift = (
+  valueAndDrift: ValueAndDrift,
+  randomFunction?: RandomFunction
+): ValueAndDrift => {
   const result = cloneDeep(valueAndDrift)
-  result.value = applyRandomDrift(valueAndDrift.value, valueAndDrift.allowedDrift, randomFunction)
+  result.value = applyRandomDrift(
+    valueAndDrift.value,
+    valueAndDrift.allowedDrift,
+    randomFunction
+  )
   return result
 }
 
-export const applyRandomDrift = (originalValue: number, allowedDrift: number, randomFunction?: RandomFunction): number => {
-  return originalValue - (allowedDrift / 2.0) + allowedDrift * random(randomFunction)
+export const applyRandomDrift = (
+  originalValue: number,
+  allowedDrift: number,
+  randomFunction?: RandomFunction
+): number => {
+  return (
+    originalValue - allowedDrift / 2.0 + allowedDrift * random(randomFunction)
+  )
 }
 
-export const applyRandomOffset = (originalValue: number, offset: number, randomFunction?: RandomFunction): number => {
-  return originalValue - offset + (offset * 2.0) * random(randomFunction)
+export const applyRandomOffset = (
+  originalValue: number,
+  offset: number,
+  randomFunction?: RandomFunction
+): number => {
+  return originalValue - offset + offset * 2.0 * random(randomFunction)
 }
 
 export enum ClampMethod {
@@ -133,7 +157,11 @@ export const applyRandomOffsetClamped = (
   method?: ClampMethod,
   randomFunction?: RandomFunction
 ): number => {
-  const unclampedResult = applyRandomOffset(originalValue, offset, randomFunction)
+  const unclampedResult = applyRandomOffset(
+    originalValue,
+    offset,
+    randomFunction
+  )
   switch (method !== undefined ? method : ClampMethod.Clamp) {
     case ClampMethod.Clamp:
       return clamp(unclampedResult, minimum, maximum)
@@ -143,7 +171,7 @@ export const applyRandomOffsetClamped = (
 
     case ClampMethod.Wrap:
       return wrap(unclampedResult, minimum, maximum)
-    
+
     default:
       return unclampedResult
   }

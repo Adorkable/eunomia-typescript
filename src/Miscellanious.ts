@@ -26,8 +26,7 @@ export const setKeyValue = (to: any, key: string, value: any) => {
         break
       } else {
         if (typeof within[nesting[index]] !== 'object') {
-          within[nesting[index]] = {
-          }
+          within[nesting[index]] = {}
         }
         within = within[nesting[index]]
       }

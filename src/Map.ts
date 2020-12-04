@@ -7,7 +7,10 @@ export const flattenMap = <ResultType>(items: any): Array<ResultType> => {
   })
 }
 
-export const mapForEach = (items: any, forEach: (value: any, key: string) => void) => {
+export const mapForEach = (
+  items: any,
+  forEach: (value: any, key: string) => void
+) => {
   const keys = Object.keys(items)
   keys.forEach((key) => {
     const originalValue = items[key]
@@ -15,9 +18,11 @@ export const mapForEach = (items: any, forEach: (value: any, key: string) => voi
   })
 }
 
-export const mapMap = (items: Object, mapTo: (value: any, key: string) => any): Object => {
-  const result: any = {
-  }
+export const mapMap = (
+  items: Object,
+  mapTo: (value: any, key: string) => any
+): Object => {
+  const result: any = {}
 
   mapForEach(items, (value: any, key: string) => {
     result[key] = mapTo(value, key)
@@ -25,9 +30,11 @@ export const mapMap = (items: Object, mapTo: (value: any, key: string) => any): 
   return result
 }
 
-export const mapFilter = (items: Object, include: (value: any, key: string) => boolean): Object => {
-  const result: any = {
-  }
+export const mapFilter = (
+  items: Object,
+  include: (value: any, key: string) => boolean
+): Object => {
+  const result: any = {}
 
   mapForEach(items, (value: any, key: string) => {
     if (include(value, key) === true) {
@@ -37,7 +44,10 @@ export const mapFilter = (items: Object, include: (value: any, key: string) => b
   return result
 }
 
-export const mapMapToArray = <ResultType>(items: Object, mapTo?: (value: any, key: string) => ResultType): Array<ResultType> => {
+export const mapMapToArray = <ResultType>(
+  items: Object,
+  mapTo?: (value: any, key: string) => ResultType
+): Array<ResultType> => {
   const result: Array<ResultType> = []
 
   mapForEach(items, (value: any, key: string) => {
@@ -50,7 +60,15 @@ export const mapMapToArray = <ResultType>(items: Object, mapTo?: (value: any, ke
   return result
 }
 
-export const mapReduce = <ResultType>(items: Object, reducer: (accumulatedValue: ResultType, currentItem: any, currentKey: string) => ResultType, initialValue: ResultType): ResultType => {
+export const mapReduce = <ResultType>(
+  items: Object,
+  reducer: (
+    accumulatedValue: ResultType,
+    currentItem: any,
+    currentKey: string
+  ) => ResultType,
+  initialValue: ResultType
+): ResultType => {
   let accumulatedValue = initialValue
 
   mapForEach(items, (value: any, key: string) => {
@@ -66,11 +84,14 @@ export const mergeMaps = (itemsArray: Array<Object>): Object => {
       merged[id] = value
     })
     return merged
-  }, {
-  })
+  }, {})
 }
 
-export const mapsEqual = <ResultType>(leftItems: any, rightItems: any, isEqual: (leftItem: ResultType, rightItem: ResultType) => boolean): boolean => {
+export const mapsEqual = <ResultType>(
+  leftItems: any,
+  rightItems: any,
+  isEqual: (leftItem: ResultType, rightItem: ResultType) => boolean
+): boolean => {
   let result: boolean = true
 
   const ids = union(Object.keys(leftItems), Object.keys(rightItems))
@@ -93,7 +114,10 @@ export const mapsEqual = <ResultType>(leftItems: any, rightItems: any, isEqual: 
   return result
 }
 
-export const mapIndexMapToArray = <ResultType>(indexMap: any, mapTo?: (value: any, indexKey: string) => ResultType): Array<ResultType> => {
+export const mapIndexMapToArray = <ResultType>(
+  indexMap: any,
+  mapTo?: (value: any, indexKey: string) => ResultType
+): Array<ResultType> => {
   const indexKeys = Object.keys(indexMap).sort()
   return indexKeys.map((indexKey) => {
     const value = indexMap[indexKey]
