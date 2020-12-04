@@ -34,11 +34,11 @@ export interface ColorGradient {
     colorStops: Array<ColorGradientColorStop>;
 }
 export declare const BlackAndWhite: ColorSet;
-export declare const colorTypeToHexString: (color: number) => string;
-export declare const colorTypeWithAlphaToHexString: (color: number, alpha: number) => string;
-export declare const colorHexStringToColorType: (color: string) => number;
+export declare const colorTypeToHexString: (color: Color) => string;
+export declare const colorTypeWithAlphaToHexString: (color: Color, alpha: number) => string;
+export declare const colorHexStringToColorType: (color: string) => Color;
 export declare const colorGradientToCSS: (colorGradient: ColorGradient) => string;
-export declare const colorSetToEvenColorGradient: (colorSet: number[]) => ColorGradient;
+export declare const colorSetToEvenColorGradient: (colorSet: ColorSet) => ColorGradient;
 declare module 'chroma-js' {
     interface ChromaStatic {
         /**
@@ -47,4 +47,4 @@ declare module 'chroma-js' {
         random(randomFunction?: RandomFunction): ChromaColor;
     }
 }
-export declare const randomColor: (randomFunction?: RandomFunction | undefined) => number;
+export declare const randomColor: (randomFunction?: RandomFunction | undefined) => Color;

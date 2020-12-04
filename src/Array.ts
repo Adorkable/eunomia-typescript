@@ -1,28 +1,30 @@
-export const compareArrays = (left: Array<any>, right: Array<any>): boolean => {
-  if ((!left && right) || (left && !right)) {
-    return false
-  }
-
-  if (!Array.isArray(left) || !Array.isArray(right)) {
-    return left === right
-  }
-
+export const compareArrayContents = async (left: Array<any>, right: Array<any>): Promise<boolean> => {
   if (left.length !== right.length) {
     return false
   }
 
-  return left.reduce((accrued, next) => {
+  if (!left.reduce((accrued, next) => {
     if (!accrued) {
       return false
     }
 
     return right.indexOf(next) !== -1
-  })
+  }, true)) {
+    return false
+  }
+
+  return right.reduce((accrued, next) => {
+    if (!accrued) {
+      return false
+    }
+
+    return left.indexOf(next) !== -1
+  }, true)
 }
 
-export const mapArrayToIndexMap = <ResultType>(items: Array<ResultType>, mapTo?: (value: any, indexKey: string) => ResultType): Object => {
-  const result: any = {
-  }
+export const mapArrayToIndexMap = async <ArrayValueType>(items: Array<ArrayValueType>, mapTo?: (value: ArrayValueType, indexKey: string) => ArrayValueType): Promise<Record<string, ArrayValueType>> => {
+  const result: Record<string, ArrayValueType> = {}
+
   items.forEach((item, index) => {
     const indexKey = index.toString(10)
     if (mapTo) {
@@ -31,6 +33,7 @@ export const mapArrayToIndexMap = <ResultType>(items: Array<ResultType>, mapTo?:
       result[indexKey] = item
     }
   })
+  
   return result
 }
 

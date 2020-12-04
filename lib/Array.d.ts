@@ -1,4 +1,4 @@
-export declare const compareArrays: (left: any[], right: any[]) => boolean;
-export declare const mapArrayToIndexMap: <ResultType>(items: ResultType[], mapTo?: ((value: any, indexKey: string) => ResultType) | undefined) => Object;
-export declare const hashStringToArrayIndex: (string: string, array: any[]) => number;
+export declare const compareArrayContents: (left: Array<any>, right: Array<any>) => Promise<boolean>;
+export declare const mapArrayToIndexMap: <ArrayValueType>(items: ArrayValueType[], mapTo?: ((value: ArrayValueType, indexKey: string) => ArrayValueType) | undefined) => Promise<Record<string, ArrayValueType>>;
+export declare const hashStringToArrayIndex: (string: string, array: Array<any>) => number;
 export declare const hashStringToArrayValue: <ValueType>(string: string, array: ValueType[]) => ValueType;
