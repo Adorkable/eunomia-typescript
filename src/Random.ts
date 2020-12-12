@@ -1,4 +1,4 @@
-import seedrandom from 'seedrandom'
+import * as seedrandom from 'seedrandom'
 
 import cloneDeep from 'lodash.clonedeep'
 import { clamp, mirror, wrap } from './Number'
