@@ -24,12 +24,16 @@ export declare const randomNoFunctionAvailableError = "No random function availa
  * @returns Randomly generated number
  */
 export declare const random: (randomFunction?: RandomFunction | undefined) => number;
+export declare const randomNumberBetweenValues: (minimum: number, maximum: number, randomFunction?: RandomFunction | undefined) => number;
 /**
  * Generate a random string
+ * @param minimumLength minimum length of returned string, defaults to `0`
+ * @param maximumLength maximum length of returned string, defaults to `2^15` (what seems to be a safe value for browsers)
+ * @param characterSet optional set of characters to select from randomly
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Randomly generated string
  */
-export declare const randomString: (randomFunction?: RandomFunction | undefined) => string;
+export declare const randomString: (minimumLength?: number | undefined, maximumLength?: number | undefined, characterSet?: string | undefined, randomFunction?: RandomFunction | undefined) => string;
 /**
  * Generate a random boolean value
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function

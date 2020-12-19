@@ -60,13 +60,46 @@ export const random = (randomFunction?: RandomFunction): number => {
   return use()
 }
 
+export const randomNumberBetweenValues = (
+  minimum: number,
+  maximum: number,
+  randomFunction?: RandomFunction
+): number => {
+  return random(randomFunction) * (maximum - minimum + 1) + minimum
+}
+
+// TODO: make this actually all characters, too lazy now :P
+const AllCharacters =
+  'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(),./;\'[]\\-=`<>?:"{}|_+~'
 /**
  * Generate a random string
+ * @param minimumLength minimum length of returned string, defaults to `0`
+ * @param maximumLength maximum length of returned string, defaults to `2^15` (what seems to be a safe value for browsers)
+ * @param characterSet optional set of characters to select from randomly
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Randomly generated string
  */
-export const randomString = (randomFunction?: RandomFunction): string => {
-  return `${random(randomFunction)}`
+export const randomString = (
+  minimumLength?: number,
+  maximumLength?: number,
+  characterSet?: string,
+  randomFunction?: RandomFunction
+): string => {
+  const targetLength = Math.floor(
+    randomNumberBetweenValues(
+      Math.min(minimumLength || 0),
+      Math.max(maximumLength || Math.pow(2, 15))
+    )
+  )
+  let result = ''
+  const useCharacters = characterSet || AllCharacters
+  while (result.length < targetLength) {
+    const characterIndex = Math.floor(
+      randomNumberBetweenValues(0, useCharacters.length)
+    )
+    result += useCharacters.charAt(characterIndex)
+  }
+  return result
 }
 
 /**
