@@ -70,7 +70,7 @@ export const randomNumberBetweenValues = (
 
 // TODO: make this actually all characters, too lazy now :P
 const AllCharacters =
-  'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(),./;\'[]\\-=`<>?:"{}|_+~'
+  'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(),./;\'[]\\-=`<>?:"{}|_+~ '
 /**
  * Generate a random string
  * @param minimumLength minimum length of returned string, defaults to `0`
