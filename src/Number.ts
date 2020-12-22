@@ -70,7 +70,7 @@ export const wrap = orderedMinMaxWrapper((number, minimum, maximum) => {
 export const mean = (values: number[]) => {
   return values.reduce((previous, current) => {
     return previous + current
-  }) / 2
+  }) / values.length
 }
 
 // Based on: https://stackoverflow.com/a/45309555
