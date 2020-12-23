@@ -18,10 +18,17 @@ test('randomString', () => {
   // TODO: test min > max
   // TODO: test contents
 
-  initializeRandom("0")
+  initializeRandom('0')
 
-  const betweenMinAndMax = randomString(Math.min(minimum, maximum), Math.max(minimum, maximum))
+  const betweenMinAndMax = randomString(
+    Math.min(minimum, maximum),
+    Math.max(minimum, maximum)
+  )
 
-  expect(betweenMinAndMax.length).toBeGreaterThanOrEqual(Math.min(minimum, maximum))
-  expect(betweenMinAndMax.length).toBeLessThanOrEqual(Math.max(maximum, minimum))
+  expect(betweenMinAndMax.length).toBeGreaterThanOrEqual(
+    Math.min(minimum, maximum)
+  )
+  expect(betweenMinAndMax.length).toBeLessThanOrEqual(
+    Math.max(maximum, minimum)
+  )
 })
