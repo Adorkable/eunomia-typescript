@@ -1,5 +1,6 @@
 import union from 'lodash.union'
 
+// TODO: rename Map to clearer name, use Record when ever appropriate
 export const flattenMap = <ResultType>(items: any): Array<ResultType> => {
   const ids = Object.keys(items)
   return ids.map((id) => {
