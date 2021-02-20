@@ -68,9 +68,11 @@ export const wrap = orderedMinMaxWrapper((number, minimum, maximum) => {
 })
 
 export const mean = (values: number[]) => {
-  return values.reduce((previous, current) => {
-    return previous + current
-  }) / values.length
+  return (
+    values.reduce((previous, current) => {
+      return previous + current
+    }) / values.length
+  )
 }
 
 // Based on: https://stackoverflow.com/a/45309555
@@ -90,4 +92,34 @@ export const median = (values: number[]) => {
   }
 
   return (values[half - 1] + values[half]) / 2.0
+}
+
+/**
+ * Linear interpolate a percent between two values
+ * @param value amount to interpolate between 0 and 1
+ * @param from start of range to interpolate
+ * @param to end of range to interpolate
+ */
+export const lerp = (value: number, from: number, to: number) => {
+  return from * (1 - value) + to * value
+}
+
+/**
+ * Map a value from one range to another
+ * @param value value to map from original range
+ * @param fromStart start of original range
+ * @param fromEnd end of original range
+ * @param toStart start of range to map to
+ * @param toEnd end of range to map to
+ */
+export const map = (
+  value: number,
+  fromStart: number,
+  fromEnd: number,
+  toStart: number,
+  toEnd: number
+): number => {
+  return (
+    toStart + ((value - fromStart) / (fromEnd - fromStart)) * (toEnd - toStart)
+  )
 }
