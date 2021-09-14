@@ -19,7 +19,6 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.union": "^4.6.0",
     "moment": "^2.29.1",
-    "now": "^16.1.2",
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
