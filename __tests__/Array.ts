@@ -1,4 +1,4 @@
-import { compareArrayContents, mapArrayToIndexMap } from '../lib'
+import { compareArrayContents } from '../lib'
 
 test('compareArrayContents', async () => {
   expect(await compareArrayContents([], [])).toBeTruthy()
