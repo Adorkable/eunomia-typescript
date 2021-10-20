@@ -20,6 +20,12 @@ export const saveImageDataToFile = (imageData: string, fileName: string) => {
   }
 }
 
+declare global {
+  interface Navigator {
+    msSaveOrOpenBlob: (blob: Blob, defaultName: string) => void
+  }
+}
+
 export const saveImageStateToFile = (imageState: Object, fileName: string) => {
   const contents = JSON.stringify(imageState)
   var file = new Blob([contents], { type: 'txt' })
