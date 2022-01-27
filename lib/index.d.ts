@@ -5,6 +5,7 @@ export * from './Map';
 export * from './Miscellanious';
 export * from './Number';
 export * from './Random';
+export * from './RequestProtocol';
 export * from './URLQuery';
 export * from './Parse';
 export * as Browser from './Browser';
