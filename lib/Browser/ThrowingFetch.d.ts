@@ -1,2 +1,1 @@
-export declare const ThrowingFetch: (url: string) => Promise<any>;
-export default ThrowingFetch;
+export declare const ThrowingFetch: (url: string, options?: RequestInit | undefined) => Promise<any>;
