@@ -1,7 +1,7 @@
 import { httpString as httpProtocolResolver } from '../RequestProtocol'
 
 export default (path: string, req?: any): string => {
-  if (!req && typeof window !== 'undefined') {
+  if (!req && typeof window === 'undefined') {
     return path
   }
   const host = req
