@@ -22,7 +22,7 @@
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
-    "@adorkable/eunomia-typescript-tests": "^0.1.1",
+    "@adorkable/eunomia-typescript-tests": "https://github.com/adorkable/eunomia-typescript-tests.git",
     "@types/chroma-js": "^1.4.2",
     "@types/jest": "^27.0.1",
     "@types/lodash.clonedeep": "^4.5.6",
