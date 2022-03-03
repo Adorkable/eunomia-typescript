@@ -8,4 +8,5 @@ export * from './Random';
 export * from './RequestProtocol';
 export * from './URLQuery';
 export * from './Parse';
+export * from './Union';
 export * as Browser from './Browser';

@@ -8,6 +8,7 @@ export * from './Random'
 export * from './RequestProtocol'
 export * from './URLQuery'
 export * from './Parse'
+export * from './Union'
 
 export * as Browser from './Browser'
 // export * as Node from './Node' // causing break by including by default, figure out the proper way to handle this
