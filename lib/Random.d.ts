@@ -15,13 +15,20 @@ export declare const createRandomFunction: (seed: any) => RandomFunction;
  */
 export declare const initializeRandom: (seed: any) => RandomFunction;
 /**
- * Error returned when calling `random` before it has been initialized
+ * Error message returned when calling `random` before it has been initialized
  */
 export declare const randomNoFunctionAvailableError = "No random function available, either provide a function or initialize random globally";
+/**
+ * Error returned when calling `random` before it has been initialized
+ */
+export declare class RandomNoFunctionAvailableError extends Error {
+    constructor();
+}
 /**
  * Generate a random number
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Randomly generated number
+ * @throws RandomNoFunctionAvailableError if no random function is available
  */
 export declare const random: (randomFunction?: RandomFunction | undefined) => number;
 export declare const randomNumberBetweenValues: (minimum: number, maximum: number, randomFunction?: RandomFunction | undefined) => number;
@@ -38,6 +45,7 @@ export declare const randomString: (minimumLength?: number | undefined, maximumL
  * Generate a random boolean value
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Randomly generated boolean value
+ * @throws RandomNoFunctionAvailableError if no random function is available
  */
 export declare const randomBool: (randomFunction?: RandomFunction | undefined) => boolean;
 /**
@@ -45,6 +53,7 @@ export declare const randomBool: (randomFunction?: RandomFunction | undefined) =
  * @param withinArray Array to return index from
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Valid random index
+ * @throws RandomNoFunctionAvailableError if no random function is available
  */
 export declare const randomIndexValueInArray: (withinArray: Array<any>, randomFunction?: RandomFunction | undefined) => number;
 /**
