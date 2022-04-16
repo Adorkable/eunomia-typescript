@@ -1,4 +1,4 @@
-import { lerp, map } from '../lib'
+import { lerp, map } from '../src'
 
 test('lerp', () => {
   expect(lerp(0, 0, 100)).toEqual(0)

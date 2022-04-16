@@ -33,30 +33,46 @@ export const initializeRandom = (seed: any): RandomFunction => {
 }
 
 /**
- * Error returned when calling `random` before it has been initialized
+ * Error message returned when calling `random` before it has been initialized
  */
 export const randomNoFunctionAvailableError =
   'No random function available, either provide a function or initialize random globally'
 
 /**
+ * Error returned when calling `random` before it has been initialized
+ */
+export class RandomNoFunctionAvailableError extends Error {
+  constructor() {
+    super(randomNoFunctionAvailableError)
+  }
+}
+
+/**
+ * Selects from an overidden or library-wide initialized random function or fails
+ * @param randomFunction an optional override random function
+ * @returns selected random function
+ * @throws RandomNoFunctionAvailableError if no random function is available
+ */
+const selectRandomFunction = (randomFunction?: RandomFunction) => {
+  if (randomFunction) {
+    return randomFunction
+  }
+
+  if (lastRandomFunction) {
+    return lastRandomFunction
+  }
+
+  throw new RandomNoFunctionAvailableError()
+}
+
+/**
  * Generate a random number
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Randomly generated number
+ * @throws RandomNoFunctionAvailableError if no random function is available
  */
 export const random = (randomFunction?: RandomFunction): number => {
-  const selectRandomFunction = () => {
-    if (randomFunction) {
-      return randomFunction
-    }
-
-    if (lastRandomFunction) {
-      return lastRandomFunction
-    }
-
-    throw new Error(randomNoFunctionAvailableError)
-  }
-
-  const use = selectRandomFunction()
+  const use = selectRandomFunction(randomFunction)
   return use()
 }
 
@@ -106,6 +122,7 @@ export const randomString = (
  * Generate a random boolean value
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Randomly generated boolean value
+ * @throws RandomNoFunctionAvailableError if no random function is available
  */
 export const randomBool = (randomFunction?: RandomFunction): boolean => {
   return random(randomFunction) < 0.5
@@ -116,6 +133,7 @@ export const randomBool = (randomFunction?: RandomFunction): boolean => {
  * @param withinArray Array to return index from
  * @param randomFunction optionally overridable `random` function, if `void` falls back to the module instance-wide `random` function
  * @returns Valid random index
+ * @throws RandomNoFunctionAvailableError if no random function is available
  */
 export const randomIndexValueInArray = (
   withinArray: Array<any>,

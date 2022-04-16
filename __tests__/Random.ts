@@ -1,6 +1,30 @@
-import { createRandomFunction, initializeRandom, randomString } from '../lib'
+import {
+  createRandomFunction,
+  initializeRandom,
+  random,
+  randomBool,
+  RandomNoFunctionAvailableError,
+  randomString
+} from '../src'
 
 import { repeatRuns } from '@adorkable/eunomia-typescript-tests'
+
+test('random(RandomFunction)', () => {
+  const seed = Math.random()
+  const random1 = createRandomFunction(seed)
+  const random2 = createRandomFunction(seed)
+  repeatRuns(() => {
+    expect(random(random1)).toEqual(random(random2))
+  })
+})
+
+test('random()', () => {
+  repeatRuns(() => {
+    expect(() => {
+      random()
+    }).toThrowError(RandomNoFunctionAvailableError)
+  })
+})
 
 test('createRandomFunction', () => {
   const seed = Math.random()
@@ -31,4 +55,21 @@ test('randomString', () => {
   expect(betweenMinAndMax.length).toBeLessThanOrEqual(
     Math.max(maximum, minimum)
   )
+})
+
+test('randomBool', () => {
+  const randomFunction = initializeRandom(Math.random() * 10000)
+
+  const count = Math.random() * 10000
+  const testTolerance = 0.1
+
+  let trueCount = 0
+  for (let index = 0; index < count; index++) {
+    if (randomBool(randomFunction)) {
+      trueCount++
+    }
+  }
+
+  expect(trueCount).toBeGreaterThanOrEqual(count / 2 - count * testTolerance)
+  expect(trueCount).toBeLessThanOrEqual(count / 2 + count * testTolerance)
 })
