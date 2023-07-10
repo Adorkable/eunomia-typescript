@@ -104,14 +104,15 @@ export const randomString = (
   const targetLength = Math.floor(
     randomNumberBetweenValues(
       Math.min(minimumLength || 0),
-      Math.max(maximumLength || Math.pow(2, 15))
+      Math.max(maximumLength || Math.pow(2, 15)),
+      randomFunction
     )
   )
   let result = ''
   const useCharacters = characterSet || AllCharacters
   while (result.length < targetLength) {
     const characterIndex = Math.floor(
-      randomNumberBetweenValues(0, useCharacters.length)
+      randomNumberBetweenValues(0, useCharacters.length, randomFunction)
     )
     result += useCharacters.charAt(characterIndex)
   }
