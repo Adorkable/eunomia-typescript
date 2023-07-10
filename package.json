@@ -1,6 +1,6 @@
 {
   "name": "@adorkable/eunomia-typescript",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The team's go-to utilities for Typescript, named for the Greek goddess of green pastures, law and legislation",
   "scripts": {
     "prepare": "npm run build & npm run test",
@@ -20,15 +20,15 @@
     "chroma-js": "github:adorkable-forkable/chroma.js",
     "lodash.clonedeep": "^4.5.0",
     "lodash.union": "^4.6.0",
-    "moment": "^2.29.2",
+    "moment": "^2.29.4",
     "seedrandom": "^3.0.5"
   },
   "devDependencies": {
     "@adorkable/eunomia-typescript-tests": "https://github.com/adorkable/eunomia-typescript-tests.git",
     "@types/chroma-js": "^1.4.2",
     "@types/jest": "^27.0.1",
-    "@types/lodash.clonedeep": "^4.5.6",
-    "@types/lodash.union": "^4.6.6",
+    "@types/lodash.clonedeep": "^4.5.7",
+    "@types/lodash.union": "^4.6.7",
     "@types/seedrandom": "^2.4.28",
     "jest": "^26.6.3",
     "jest-junit": "^16.0.0",
