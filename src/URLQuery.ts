@@ -5,7 +5,7 @@ export interface URLQueryParameter {
 
 export const parseURLQuery = (
   queryString: string
-): Array<URLQueryParameter> => {
+): URLQueryParameter[] => {
   const pairs = (
     queryString[0] === '?' ? queryString.substr(1) : queryString
   ).split('&')

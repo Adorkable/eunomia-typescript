@@ -1,6 +1,6 @@
 import os from 'os'
 
-export default (): Array<string> => {
+export default (): string[] => {
   if (!os) {
     return []
   }
@@ -9,7 +9,7 @@ export default (): Array<string> => {
     return []
   }
 
-  var result: Array<string> = []
+  var result: string[] = []
   Object.keys(ifaces).forEach(function (ifname) {
     var alias = 0
 

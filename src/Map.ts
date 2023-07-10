@@ -1,7 +1,7 @@
 import union from 'lodash.union'
 
 // TODO: rename Map to clearer name, use Record when ever appropriate
-export const flattenMap = <ResultType>(items: any): Array<ResultType> => {
+export const flattenMap = <ResultType>(items: any): ResultType[] => {
   const ids = Object.keys(items)
   return ids.map((id) => {
     return items[id]
@@ -48,8 +48,8 @@ export const mapFilter = (
 export const mapMapToArray = <ResultType>(
   items: Object,
   mapTo?: (value: any, key: string) => ResultType
-): Array<ResultType> => {
-  const result: Array<ResultType> = []
+): ResultType[] => {
+  const result: ResultType[] = []
 
   mapForEach(items, (value: any, key: string) => {
     if (mapTo) {
@@ -79,7 +79,7 @@ export const mapReduce = <ResultType>(
   return accumulatedValue
 }
 
-export const mergeMaps = (itemsArray: Array<Object>): Object => {
+export const mergeMaps = (itemsArray: Object[]): Object => {
   return itemsArray.reduce((merged: any, currents: Object) => {
     mapForEach(currents, (value, id) => {
       merged[id] = value
@@ -118,7 +118,7 @@ export const mapsEqual = <ResultType>(
 export const mapIndexMapToArray = <ResultType>(
   indexMap: any,
   mapTo?: (value: any, indexKey: string) => ResultType
-): Array<ResultType> => {
+): ResultType[] => {
   const indexKeys = Object.keys(indexMap).sort()
   return indexKeys.map((indexKey) => {
     const value = indexMap[indexKey]

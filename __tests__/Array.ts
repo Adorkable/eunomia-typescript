@@ -48,7 +48,7 @@ test('compareArrayContents', async () => {
 })
 
 // const compareArrayToIndexMap = <ValueType>(
-//   array: Array<ValueType>,
+//   array: readonly ValueType[],
 //   indexMap: Record<string, ValueType>,
 //   mapTo?: (value: number, indexKey: string) => ValueType
 // ) => {

@@ -5,7 +5,7 @@ import { RandomFunction } from './Random'
 
 export type Color = number
 
-export type ColorSet = Array<Color>
+export type ColorSet = Color[]
 
 export interface ColorGradientLinear {
   linear: true
@@ -48,7 +48,7 @@ export interface ColorGradientColorStop {
 export interface ColorGradient {
   type: ColorGradientLinear | ColorGradientRadial
   // repeating: boolean,
-  colorStops: Array<ColorGradientColorStop>
+  colorStops: ColorGradientColorStop[]
 }
 
 export const BlackAndWhite: ColorSet = [0x000000, 0xffffff]

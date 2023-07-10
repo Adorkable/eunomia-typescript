@@ -152,7 +152,7 @@ export const randomIndexValueInArray = (
  * @returns Random value from the provided array
  */
 export const randomValueInArray = <TypeOfValue>(
-  withinArray: Array<TypeOfValue>,
+  withinArray: readonly TypeOfValue[],
   randomFunction?: RandomFunction
 ): TypeOfValue => {
   return withinArray[randomIndexValueInArray(withinArray, randomFunction)]

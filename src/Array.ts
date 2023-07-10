@@ -1,6 +1,6 @@
 export const compareArrayContents = async (
-  left: Array<any>,
-  right: Array<any>
+  left: readonly any[],
+  right: readonly any[]
 ): Promise<boolean> => {
   if (left.length !== right.length) {
     return false
@@ -28,7 +28,7 @@ export const compareArrayContents = async (
 }
 
 export const mapArrayToIndexMap = async <ArrayValueType>(
-  items: Array<ArrayValueType>,
+  items: readonly ArrayValueType[],
   mapTo?: (value: ArrayValueType, indexKey: string) => ArrayValueType
 ): Promise<Record<string, ArrayValueType>> => {
   const result: Record<string, ArrayValueType> = {}
@@ -47,7 +47,7 @@ export const mapArrayToIndexMap = async <ArrayValueType>(
 
 export const hashStringToArrayIndex = (
   string: string,
-  array: Array<any>
+  array: readonly any[]
 ): number => {
   const hash = string.split('').reduce((previous, character) => {
     return character.charCodeAt(0) + previous
@@ -57,7 +57,7 @@ export const hashStringToArrayIndex = (
 
 export const hashStringToArrayValue = <ValueType>(
   string: string,
-  array: Array<ValueType>
+  array: readonly ValueType[]
 ): ValueType => {
   const index = hashStringToArrayIndex(string, array)
   return array[index]
