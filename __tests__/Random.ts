@@ -3,6 +3,8 @@ import {
   initializeRandom,
   random,
   randomBool,
+  RandomFunction,
+  randomIndexValueInArray,
   RandomNoFunctionAvailableError,
   randomString
 } from '../src'
@@ -72,4 +74,47 @@ test('randomBool', () => {
 
   expect(trueCount).toBeGreaterThanOrEqual(count / 2 - count * testTolerance)
   expect(trueCount).toBeLessThanOrEqual(count / 2 + count * testTolerance)
+})
+
+const createRandomArray = (length: number, randomFunction: () => number) => {
+  const array = new Array(length)
+  for (let index = 0; index < length; index++) {
+    array[index] = randomFunction()
+  }
+  return array
+}
+
+const createCountArray = (length: number) => {
+  return new Array(length).fill(0)
+}
+
+const literalArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'] as const
+type LiteralArray = typeof literalArray[number]
+
+const expectIndexCount = (array: readonly any[], testTolerance: number, randomFunction: RandomFunction) => {
+  const length = array.length
+
+  const count = Math.floor(Math.random() * (length * 10000))
+  const indexCount = createCountArray(length)
+
+  for (let index = 0; index < count; index++) {
+    const randomIndex = randomIndexValueInArray(array, randomFunction)
+    indexCount[randomIndex]++
+  }
+
+  const expectedIndexCount = count / length
+  const expectedIndexCountTolerance = count * testTolerance
+
+  indexCount.forEach((value) => {
+    expect(value).toBeGreaterThanOrEqual(expectedIndexCount - expectedIndexCountTolerance)
+    expect(value).toBeLessThanOrEqual(expectedIndexCount + expectedIndexCountTolerance)
+  })
+}
+
+test('randomIndexValueInArray', () => {
+  const randomFunction = initializeRandom(Math.random() * 10000)
+
+  const tolerance = 0.1
+  expectIndexCount(createRandomArray(Math.floor(Math.random() * 1000), randomFunction), tolerance, randomFunction)
+  expectIndexCount(literalArray, tolerance, randomFunction)
 })

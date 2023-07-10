@@ -137,7 +137,7 @@ export const randomBool = (randomFunction?: RandomFunction): boolean => {
  * @throws RandomNoFunctionAvailableError if no random function is available
  */
 export const randomIndexValueInArray = (
-  withinArray: Array<any>,
+  withinArray: readonly any[],
   randomFunction?: RandomFunction
 ): number => {
   const portion = withinArray.length * random(randomFunction)
