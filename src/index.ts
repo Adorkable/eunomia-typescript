@@ -1,3 +1,4 @@
+export * from './Async'
 export * from './Array'
 export * from './Color'
 export * from './Date'
