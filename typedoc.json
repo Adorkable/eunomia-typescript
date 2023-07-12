@@ -1,4 +1,10 @@
 {
-    "entryPoints": ["src/index.ts"],
-    "out": "docs"
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "out": "docs",
+    "titleLink": "https://github.com/Adorkable/eunomia-typescript",
+    "navigationLinks": {
+        "github": "https://github.com/Adorkable/eunomia-typescript"
+    }
 }
