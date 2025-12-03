@@ -1,5 +1,5 @@
 export const saveImageDataToFile = (imageData: string, fileName: string) => {
-  var link = document.createElement('a')
+  const link = document.createElement('a')
   if (link && typeof link.download === 'string') {
     if (document.body) {
       const body = document.body
@@ -26,9 +26,9 @@ declare global {
   }
 }
 
-export const saveImageStateToFile = (imageState: Object, fileName: string) => {
+export const saveImageStateToFile = (imageState: object, fileName: string) => {
   const contents = JSON.stringify(imageState)
-  var file = new Blob([contents], { type: 'txt' })
+  const file = new Blob([contents], { type: 'txt' })
   if (window.navigator.msSaveOrOpenBlob) {
     // IE10+
     window.navigator.msSaveOrOpenBlob(file, fileName)
