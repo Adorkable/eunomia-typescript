@@ -9,3 +9,7 @@ export const humanReadableSinceDateTimeFormatter = (
 ) => {
   return moment(dateTime).fromNow()
 }
+
+export const replaceJapaneseDateKanjis = (date: string, separator: string = '/') => {
+  return date.replace(/年|月|日/g, separator)
+}

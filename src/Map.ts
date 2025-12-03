@@ -20,9 +20,9 @@ export const mapForEach = (
 }
 
 export const mapMap = (
-  items: Object,
+  items: object,
   mapTo: (value: any, key: string) => any
-): Object => {
+): object => {
   const result: any = {}
 
   mapForEach(items, (value: any, key: string) => {
@@ -32,9 +32,9 @@ export const mapMap = (
 }
 
 export const mapFilter = (
-  items: Object,
+  items: object,
   include: (value: any, key: string) => boolean
-): Object => {
+): object => {
   const result: any = {}
 
   mapForEach(items, (value: any, key: string) => {
@@ -46,7 +46,7 @@ export const mapFilter = (
 }
 
 export const mapMapToArray = <ResultType>(
-  items: Object,
+  items: object,
   mapTo?: (value: any, key: string) => ResultType
 ): ResultType[] => {
   const result: ResultType[] = []
@@ -62,7 +62,7 @@ export const mapMapToArray = <ResultType>(
 }
 
 export const mapReduce = <ResultType>(
-  items: Object,
+  items: object,
   reducer: (
     accumulatedValue: ResultType,
     currentItem: any,
@@ -79,8 +79,8 @@ export const mapReduce = <ResultType>(
   return accumulatedValue
 }
 
-export const mergeMaps = (itemsArray: Object[]): Object => {
-  return itemsArray.reduce((merged: any, currents: Object) => {
+export const mergeMaps = (itemsArray: object[]): object => {
+  return itemsArray.reduce((merged: any, currents: object) => {
     mapForEach(currents, (value, id) => {
       merged[id] = value
     })
@@ -128,3 +128,6 @@ export const mapIndexMapToArray = <ResultType>(
     return value
   })
 }
+
+// Based on https://stackoverflow.com/questions/79747534/enum-object-with-guaranteed-no-duplicate-values
+export type MapWithNoDuplicateValues<Key extends keyof TestRecord, Value, TestRecord extends Record<Key, Value>> = { [K in keyof TestRecord]: Exclude<TestRecord[K], TestRecord[Exclude<keyof TestRecord, K>]> }

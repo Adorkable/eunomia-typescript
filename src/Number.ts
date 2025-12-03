@@ -123,3 +123,8 @@ export const map = (
     toStart + ((value - fromStart) / (fromEnd - fromStart)) * (toEnd - toStart)
   )
 }
+
+export const signForValue = (value: number, hidePlus?: boolean) => 
+  value > 0
+    ? hidePlus ? '' : '+'
+    : value < 0 ? '-' : ''
