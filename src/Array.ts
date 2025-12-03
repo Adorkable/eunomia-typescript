@@ -72,3 +72,7 @@ export const notEmpty = <TValue>(
   const testDummy: TValue = value
   return true
 }
+
+export const calculateArraySum = (array: number[]): number => {
+  return array.reduce((a, b) => a + b, 0)
+}
