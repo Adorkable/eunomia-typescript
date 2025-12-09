@@ -28,7 +28,7 @@ declare global {
 
 export const saveImageStateToFile = (imageState: Object, fileName: string) => {
   const contents = JSON.stringify(imageState)
-  var file = new Blob([contents], { type: 'txt' })
+  const file = new Blob([contents], { type: 'txt' })
   if (window.navigator.msSaveOrOpenBlob) {
     // IE10+
     window.navigator.msSaveOrOpenBlob(file, fileName)
