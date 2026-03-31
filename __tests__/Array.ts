@@ -1,4 +1,11 @@
-import { compareArrayContents } from '../src'
+import {
+  calculateArraySum,
+  compareArrayContents,
+  hashStringToArrayIndex,
+  hashStringToArrayValue,
+  mapArrayToIndexMap,
+  notEmpty
+} from '../src'
 
 test('compareArrayContents', async () => {
   expect(await compareArrayContents([], [])).toBeTruthy()
@@ -47,40 +54,60 @@ test('compareArrayContents', async () => {
   ).toBeFalsy()
 })
 
-// const compareArrayToIndexMap = <ValueType>(
-//   array: readonly ValueType[],
-//   indexMap: Record<string, ValueType>,
-//   mapTo?: (value: number, indexKey: string) => ValueType
-// ) => {
-//   const resultKeys = Object.keys(indexMap)
+test('mapArrayToIndexMap creates index-keyed map', async () => {
+  const result = await mapArrayToIndexMap([10, 20, 30])
+  expect(result).toEqual({ '0': 10, '1': 20, '2': 30 })
+})
 
-//   array.forEach((item, index) => {
-//     const itemKey = index.toString(10)
+test('mapArrayToIndexMap applies mapTo when provided', async () => {
+  const result = await mapArrayToIndexMap([10, 20], (value, key) => value + parseInt(key))
+  expect(result).toEqual({ '0': 10, '1': 21 })
+})
 
-//     expect(resultKeys.indexOf(itemKey)).not.toEqual(-1)
-//     expect(indexMap[itemKey]).toEqual(mapTo ? mapTo(item, itemKey) : item)
+test('mapArrayToIndexMap empty array returns empty map', async () => {
+  const result = await mapArrayToIndexMap([])
+  expect(result).toEqual({})
+})
 
-//     resultKeys.splice(resultKeys.indexOf(itemKey), 1)
-//   })
+test('hashStringToArrayIndex returns valid index', () => {
+  const array = ['a', 'b', 'c', 'd']
+  const index = hashStringToArrayIndex('hello', array)
+  expect(index).toBeGreaterThanOrEqual(0)
+  expect(index).toBeLessThan(array.length)
+})
 
-//   expect(resultKeys.length).toEqual(0)
-// }
+test('hashStringToArrayIndex is deterministic', () => {
+  const array = ['a', 'b', 'c']
+  expect(hashStringToArrayIndex('test', array)).toEqual(hashStringToArrayIndex('test', array))
+})
 
-// test('mapArrayToIndexMap', async () => {
-//   const items = [1, 2, 3, 4, 5, 6, 7]
+test('hashStringToArrayValue returns element from array', () => {
+  const array = ['red', 'green', 'blue']
+  const value = hashStringToArrayValue('hello', array)
+  expect(array).toContain(value)
+})
 
-//   const result = await mapArrayToIndexMap(items)
+test('hashStringToArrayValue is deterministic', () => {
+  const array = ['x', 'y', 'z']
+  expect(hashStringToArrayValue('key', array)).toEqual(hashStringToArrayValue('key', array))
+})
 
-//   compareArrayToIndexMap(items, result)
-// })
+test('notEmpty returns true for non-null/undefined values', () => {
+  expect(notEmpty(0)).toBe(true)
+  expect(notEmpty('')).toBe(true)
+  expect(notEmpty(false)).toBe(true)
+  expect(notEmpty([])).toBe(true)
+  expect(notEmpty({})).toBe(true)
+})
 
-// test('mapArrayToIndexMapWithMapTo', async () => {
-//   const items = [1, 2, 3, 4, 5, 6, 7]
+test('notEmpty returns false for null and undefined', () => {
+  expect(notEmpty(null)).toBe(false)
+  expect(notEmpty(undefined)).toBe(false)
+})
 
-//   const mapTo = (item: any, indexKey: string) => {
-//     return item.toString(10) + '_' + indexKey
-//   }
-//   const result = await mapArrayToIndexMap(items, mapTo)
-
-//   compareArrayToIndexMap(items, result, mapTo)
-// })
+test('calculateArraySum returns sum of numbers', () => {
+  expect(calculateArraySum([1, 2, 3, 4, 5])).toEqual(15)
+  expect(calculateArraySum([0, 0, 0])).toEqual(0)
+  expect(calculateArraySum([-1, 1])).toEqual(0)
+  expect(calculateArraySum([100])).toEqual(100)
+})
