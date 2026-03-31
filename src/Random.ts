@@ -1,6 +1,5 @@
-import * as seedrandom from 'seedrandom'
-
 import cloneDeep from 'lodash.clonedeep'
+import seedrandom = require('seedrandom')
 import { clamp, mirror, wrap } from './Number'
 
 /**
